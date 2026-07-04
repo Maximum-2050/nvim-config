@@ -1,15 +1,15 @@
 function FIND_PROJECT_ROOT(fname)
-  local dir = vim.fn.fnamemodify(fname, ":p:h") -- start from file's directory
+  local dir = vim.fn.fnamemodify(fname, ":p:h")
   while dir ~= "/" do
-    if vim.fn.filereadable(dir .. "/CMake.sh") == 1 then
+    if vim.fn.filereadable(dir .. "/Run.sh") == 1 then
       return dir
     end
-    dir = vim.fn.fnamemodify(dir, ":h") -- go one level up
+    dir = vim.fn.fnamemodify(dir, ":h")
   end
   return nil
 end
 
-function RUN_CMAKE_SH()
+function RUN_PROGRAM_SH()
   local fname = vim.api.nvim_buf_get_name(0)
   local root = FIND_PROJECT_ROOT(fname)
 
@@ -18,7 +18,7 @@ function RUN_CMAKE_SH()
     return
   end
 
-  local buildScript = root .. "/CMake.sh"
+  local buildScript = root .. "/Run.sh"
 
   if vim.fn.filereadable(buildScript) == 0 then
     print("No buildScript found in root")

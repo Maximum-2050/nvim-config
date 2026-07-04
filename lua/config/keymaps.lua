@@ -4,6 +4,29 @@
 
 require("config.functions")
 
+
+vim.keymap.set("n", ";", ":", { desc = "Enter command mode" })
+vim.keymap.set("i", "jj", "<ESC>")
+vim.keymap.set("i", "jk", "<ESC>")
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n><C-k>]])
+vim.keymap.set("n", "/", "gcc", { remap = true, desc = "Comment line" })
+vim.keymap.set("v", "/", "gc", { remap = true, desc = "Comment line" })
+vim.keymap.set("n", "<Leader>ff", "/", { desc = "Search" })
+
+vim.keymap.set("n", "K", function()
+  local line = vim.api.nvim_win_get_cursor(0)[1] - 1
+  local diagnostics = vim.diagnostic.get(0, { lnum = line })
+
+  if #diagnostics > 0 then
+    vim.diagnostic.open_float(nil, {
+      border = "rounded",
+      focusable = true,
+    })
+  else
+    vim.lsp.buf.hover()
+  end
+end, { desc = "Hover docs or diagnostics" })
+
 vim.keymap.set("n", "<leader>v", function()
     local fname = vim.api.nvim_buf_get_name(0)
     local root = FIND_PROJECT_ROOT(fname)
@@ -13,7 +36,7 @@ vim.keymap.set("n", "<leader>v", function()
         return
     end
 
-    local buildScript = root .. "/CMake.sh"
+    local buildScript = root .. "/Run.sh"
 
     if vim.fn.filereadable(buildScript) == 0 then
         print("No buildScript found in root")
@@ -25,12 +48,3 @@ vim.keymap.set("n", "<leader>v", function()
         detach = true,
     })
 end, { desc = "Run build script" })
-
-vim.keymap.set("n", ";", ":", { desc = "Enter command mode" })
-vim.keymap.set("i", "jj", "<ESC>")
-vim.keymap.set("i", "jk", "<ESC>")
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n><C-k>]])
-vim.keymap.set("n", "/", "gcc", { remap = true, desc = "Comment line" })
-vim.keymap.set("v", "/", "gc", { remap = true, desc = "Comment line" })
-vim.keymap.set("n", "<Leader>ff", "/", { desc = "Search" })
-

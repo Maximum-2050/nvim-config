@@ -31,6 +31,10 @@ return {
         version = '^5',
         lazy = false,
     },
+
+    -- Y IOO
+    -- G OOO
+    -- H 
     -- add tsserver and setup with typescript.nvim instead of lspconfig
     -- {
     --   "neovim/nvim-lspconfig",
