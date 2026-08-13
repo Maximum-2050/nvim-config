@@ -3,13 +3,22 @@
 -- Add any additional options here
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp", "lua", "python", "h", "hpp" },
+  pattern = { "rs", "c", "cpp", "lua", "python", "h", "hpp" },
   callback = function()
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
     vim.bo.softtabstop = 4
     vim.bo.expandtab = true
   end,
+})
+
+vim.diagnostic.config({
+  virtual_text = {
+    current_line = true, -- or simply true
+  },
+  underline = true,
+  signs = true,
+  severity_sort = true,
 })
 
 vim.g.rustaceanvim = {
