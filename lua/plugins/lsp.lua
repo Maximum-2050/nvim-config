@@ -1,0 +1,42 @@
+return {
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   dependencies = {
+  --     "saghen/blink.cmp",
+  --   },
+  --
+  --   config = function()
+  --     -- Configure completion capabilities
+  --     vim.lsp.config("rust_analyzer", {
+  --       capabilities = require("blink.cmp").get_lsp_capabilities(),
+  --
+  --       settings = {
+  --         ["rust-analyzer"] = {
+  --           cargo = {
+  --             allFeatures = true,
+  --           },
+  --
+  --           check = {
+  --             command = "clippy",
+  --           },
+  --
+  --           procMacro = {
+  --             enable = true,
+  --           },
+  --
+  --           -- diagnostics = {
+  --           --   enable = true,
+  --           -- },
+  --           --
+  --           -- inlayHints = {
+  --           --   enable = true,
+  --           -- },
+  --         },
+  --       },
+  --     })
+  --
+  --     -- Enable Rust LSP
+  --     vim.lsp.enable("rust_analyzer")
+  --   end,
+  -- },
+}
